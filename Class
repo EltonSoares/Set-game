@@ -1,0 +1,442 @@
+package set;
+
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+public class Set
+{
+  private JTextField pontos;
+  private JButton[][] mesa;
+  private String[] cartas;
+  private int[] cartasSelecionadas = new int[3];
+  private JFrame frame;
+  public int[][] M = new int[81][4];
+  public int[] monte = new int[81];
+  public int tamanho = 80;
+  
+  public Set()
+  {
+    this.mesa = new JButton[3][7];
+    this.pontos = new JTextField();
+  }
+  
+  public Set(JButton[][] mesa, JTextField pont, JFrame frame)
+  {
+    this.mesa = mesa;
+    this.pontos = pont;
+    this.frame = frame;
+    for (int i = 0; i < this.cartasSelecionadas.length; i++) {
+      this.cartasSelecionadas[i] = -1;
+    }
+  }
+  
+  public void Iniciar()
+  {
+    int[] pecas = new int[3];
+    this.tamanho = 80;
+    PreencheMatriz();
+    PreencheMonte();
+    this.pontos.setText("0");
+    do
+    {
+      LimparMesa();
+      for (int i = 0; i < 4; i++)
+      {
+        SorteiaTres(pecas);
+        DistribuirCartas(pecas);
+      }
+    } while (!TemSetNaMesa());
+    GerenciarSlots();
+  }
+  
+  public void RedimensionarLarguraJanela()
+  {
+    int width = 0;
+    for (int j = 0; j < this.mesa[0].length; j++) {
+      if (this.mesa[0][j].isVisible()) {
+        width++;
+      }
+    }
+    width = 108 * width;
+    this.frame.setSize(width, 276);
+  }
+  
+  private void GerenciarSlots()
+  {
+    boolean distribuir = true;
+    for (int j = 0; j < this.mesa[0].length; j++) {
+      for (int i = 0; i < this.mesa.length; i++) {
+        if (VerificarSlotLivre(this.mesa[i][j])) {
+          if (j >= 4)
+          {
+            this.mesa[i][j].setName(null);
+            this.mesa[i][j].setVisible(false);
+            distribuir = false;
+          }
+          else if (this.tamanho < 0)
+          {
+            this.mesa[i][j].setName(null);
+            this.mesa[i][j].setEnabled(false);
+            distribuir = false;
+          }
+        }
+      }
+    }
+    if ((this.tamanho < 0) && 
+      (!TemSetNaMesa())) {
+      Terminar("Parab��ns, sua pontua����o foi de: " + this.pontos.getText(), true);
+    }
+    if (distribuir)
+    {
+      int[] pecas = new int[3];
+      SorteiaTres(pecas);
+      DistribuirCartas(pecas);
+    }
+    RedimensionarLarguraJanela();
+  }
+  
+  private void LimparMesa()
+  {
+    for (int j = 0; j < this.mesa[0].length; j++) {
+      for (int i = 0; i < this.mesa.length; i++)
+      {
+        this.mesa[i][j].setName(null);
+        this.mesa[i][j].setIcon(null);
+        this.mesa[i][j].setEnabled(true);
+        this.mesa[i][j].setVisible(true);
+        if (j > 3) {
+          this.mesa[i][j].setVisible(false);
+        }
+      }
+    }
+  }
+  
+  public void AdicionarColunaSlots()
+  {
+    boolean add = false;
+    if (this.tamanho >= 0) {
+      for (int j = 0; j < this.mesa[0].length; j++) {
+        if (!this.mesa[0][j].isVisible())
+        {
+          for (int i = 0; i < this.mesa.length; i++) {
+            this.mesa[i][j].setVisible(true);
+          }
+          j = this.mesa[0].length;
+          add = true;
+        }
+      }
+    }
+    if (add)
+    {
+      int[] pecas = new int[3];
+      SorteiaTres(pecas);
+      DistribuirCartas(pecas);
+    }
+    else
+    {
+      JOptionPane.showMessageDialog(null, "N��o h�� mais colunas dispon��veis!");
+    }
+    RedimensionarLarguraJanela();
+  }
+  
+  public boolean Terminar(String mensagem, boolean reiniciar)
+  {
+    for (int i = 0; i < this.mesa.length; i++) {
+      for (int j = 0; j < this.mesa[i].length; j++) {
+        this.mesa[i][j].setEnabled(false);
+      }
+    }
+    JOptionPane.showMessageDialog(null, mensagem);
+    if (reiniciar) {
+      Iniciar();
+    }
+    return true;
+  }
+  
+  private void PreencheMatriz()
+  {
+    for (int i = 0; i < 81; i++)
+    {
+      this.M[i][0] = (i / 27 + 1);
+      
+      this.M[i][1] = (i / 9 % 3 + 4);
+      
+      this.M[i][2] = (i / 3 % 3 + 7);
+      
+      this.M[i][3] = (i % 3 + 10);
+    }
+  }
+  
+  private void PreencheMonte()
+  {
+    for (int i = 0; i < 81; i++) {
+      this.monte[i] = i;
+    }
+  }
+  
+  private void DistribuirCartas(int[] pecas)
+  {
+    boolean distribui = true;
+    for (int i = 0; i < pecas.length; i++) {
+      if (pecas[i] < 0) {
+        distribui = false;
+      }
+    }
+    if (distribui)
+    {
+      int j = 0;
+      for (int cont = 0; j < this.mesa[0].length; j++) {
+        for (int i = 0; (i < this.mesa.length) && (cont < pecas.length); i++) {
+          if (VerificarSlotLivre(this.mesa[i][j]))
+          {
+            PreencherSlotComCarta(this.mesa[i][j], pecas[cont]);
+            cont++;
+          }
+        }
+      }
+    }
+  }
+  
+  private void PreencherSlotComCarta(JButton slot, int carta)
+  {
+    DefinirImagemCarta(slot, String.valueOf(carta));
+    slot.setPreferredSize(new Dimension(95, 55));
+    slot.setName(String.valueOf(carta));
+    if (slot.getActionListeners().length == 0) {
+      slot.addActionListener(new ActionListener()
+      {
+        public void actionPerformed(ActionEvent evt)
+        {
+          Set.this.ClicarCarta(evt);
+        }
+      });
+    }
+  }
+  
+  private void DefinirImagemCarta(JButton slot, String carta)
+  {
+    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/" + carta + ".jpg"));
+    Image img = icon.getImage();
+    img = img.getScaledInstance(95, 55, 4);
+    slot.setIcon(new ImageIcon(img));
+  }
+  
+  private int ExisteCarta(int carta)
+  {
+    for (int i = 0; i < this.cartasSelecionadas.length; i++) {
+      if (this.cartasSelecionadas[i] == carta) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
+  public void ClicarCarta(ActionEvent evt)
+  {
+    JButton myButton = (JButton)evt.getSource();
+    
+    int carta = Integer.parseInt(myButton.getName());
+    
+    int pos = ExisteCarta(carta);
+    if (pos >= 0)
+    {
+      this.cartasSelecionadas[pos] = -1;
+      DefinirImagemCarta(myButton, myButton.getName());
+    }
+    else
+    {
+      int cont = 0;
+      for (int i = 0; i < this.cartasSelecionadas.length; cont++)
+      {
+        if (this.cartasSelecionadas[i] == -1)
+        {
+          this.cartasSelecionadas[i] = carta;
+          i = this.cartasSelecionadas.length;
+        }
+        i++;
+      }
+      DefinirImagemCarta(myButton, myButton.getName() + "_1");
+      if (cont == this.cartasSelecionadas.length) {
+        AtribuirPontos();
+      }
+    }
+  }
+  
+  private void AtribuirPontos()
+  {
+    int pont = Integer.parseInt(this.pontos.getText());
+    if (VerificaSet(this.cartasSelecionadas[0], this.cartasSelecionadas[1], this.cartasSelecionadas[2]))
+    {
+      this.pontos.setText(String.valueOf(pont + 10));
+      RetirarCartaSlot();
+      OrganizarMesa();
+      GerenciarSlots();
+    }
+    else
+    {
+      this.pontos.setText(String.valueOf(pont - 10));
+      for (int i = 0; i < this.mesa.length; i++) {
+        for (int j = 0; j < this.mesa[0].length; j++) {
+          for (int k = 0; k < this.cartasSelecionadas.length; k++) {
+            if ((this.mesa[i][j].isVisible()) && (this.mesa[i][j].isEnabled()) && (this.cartasSelecionadas[k] == Integer.parseInt(this.mesa[i][j].getName()))) {
+              DefinirImagemCarta(this.mesa[i][j], this.mesa[i][j].getName());
+            }
+          }
+        }
+      }
+    }
+    for (int i = 0; i < this.cartasSelecionadas.length; i++) {
+      this.cartasSelecionadas[i] = -1;
+    }
+  }
+  
+  private void RetirarCartaSlot()
+  {
+    for (int i = 0; i < this.mesa.length; i++) {
+      for (int j = 0; j < this.mesa[0].length; j++) {
+        for (int a = 0; a < this.cartasSelecionadas.length; a++) {
+          if ((this.mesa[i][j].getName() != null) && (this.cartasSelecionadas[a] == Integer.parseInt(this.mesa[i][j].getName())))
+          {
+            this.mesa[i][j].setName(null);
+            this.mesa[i][j].setIcon(null);
+          }
+        }
+      }
+    }
+  }
+  
+  private void SorteiaTres(int[] novasPecas)
+  {
+    if (this.tamanho > 0) {
+      for (int i = 0; i < 3; i++)
+      {
+        int aux = (int)(Math.random() * this.tamanho);
+        novasPecas[i] = this.monte[aux];
+        this.monte[aux] = this.monte[this.tamanho];
+        this.monte[this.tamanho] = -1;
+        this.tamanho -= 1;
+      }
+    } else {
+      for (int i = 0; i < novasPecas.length; i++) {
+        novasPecas[i] = -1;
+      }
+    }
+  }
+  
+  private boolean VerificaSet(int x, int y, int z)
+  {
+    for (int j = 0; j < 4; j++) {
+      if ((this.M[x][j] + this.M[y][j] + this.M[z][j]) % 3 != 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  private boolean TemSetNaMesa()
+  {
+    int qtdeMesa = 0;
+    for (int i = 0; i < this.mesa.length; i++) {
+      for (int j = 0; j < this.mesa[i].length; j++) {
+        if ((this.mesa[i][j].isVisible()) && (this.mesa[i][j].isEnabled())) {
+          qtdeMesa++;
+        }
+      }
+    }
+    for (int i = 0; i < qtdeMesa - 2; i++) {
+      for (int j = i + 1; j < qtdeMesa - 1; j++) {
+        for (int k = j + 1; k < qtdeMesa; k++) {
+          if (VerificaSet(Integer.parseInt(this.mesa[(i % 3)][(i / 3)].getName()), Integer.parseInt(this.mesa[(j % 3)][(j / 3)].getName()), Integer.parseInt(this.mesa[(k % 3)][(k / 3)].getName()))) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+  
+  private void OrganizarMesa()
+  {
+    int totalLinhas = this.mesa[0].length;
+    
+    int j = 0;
+    for (int cont = 0; j < totalLinhas; j++) {
+      for (int i = 0; i < this.mesa.length; i++) {
+        if (VerificarSlotLivre(this.mesa[i][j])) {
+          for (int b = this.mesa[0].length - 1; b >= 0; b--) {
+            for (int a = this.mesa.length - 1; a >= 0; a--) {
+              if ((cont < 3) && (VerificarSlotOcupado(this.mesa[a][b])))
+              {
+                PreencherSlotComCarta(this.mesa[i][j], Integer.parseInt(this.mesa[a][b].getName()));
+                this.mesa[a][b].setName(null);
+                this.mesa[a][b].setIcon(null);
+                totalLinhas = b;
+                b = -1;
+                a = -1;
+                cont++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  public void MostrarSetNaMesa()
+  {
+    int qtdeMesa = 0;
+    for (int i = 0; i < this.mesa.length; i++) {
+      for (int j = 0; j < this.mesa[i].length; j++) {
+        if ((this.mesa[i][j].isVisible()) && (this.mesa[i][j].getName() != null)) {
+          qtdeMesa++;
+        }
+      }
+    }
+    for (int i = 0; i < qtdeMesa - 2; i++) {
+      for (int j = i + 1; j < qtdeMesa - 1; j++) {
+        for (int k = j + 1; k < qtdeMesa; k++) {
+          if (VerificaSet(Integer.parseInt(this.mesa[(i % 3)][(i / 3)].getName()), Integer.parseInt(this.mesa[(j % 3)][(j / 3)].getName()), Integer.parseInt(this.mesa[(k % 3)][(k / 3)].getName())))
+          {
+            DefinirImagemCarta(this.mesa[(i % 3)][(i / 3)], this.mesa[(i % 3)][(i / 3)].getName() + "_2");
+            DefinirImagemCarta(this.mesa[(j % 3)][(j / 3)], this.mesa[(j % 3)][(j / 3)].getName() + "_2");
+            DefinirImagemCarta(this.mesa[(k % 3)][(k / 3)], this.mesa[(k % 3)][(k / 3)].getName() + "_2");
+            return;
+          }
+        }
+      }
+    }
+    JOptionPane.showMessageDialog(null, "N��o h�� set na mesa!");
+  }
+  
+  private boolean VerificarSlotLivre(JButton slot)
+  {
+    return (slot.isVisible()) && ((slot.getName() == null) || (slot.getName().equals("")));
+  }
+  
+  private boolean VerificarSlotOcupado(JButton slot)
+  {
+    boolean cond;
+    boolean cond;
+    if ((slot.getName() == null) || (!slot.isVisible()))
+    {
+      cond = false;
+    }
+    else
+    {
+      boolean cond;
+      if (!slot.getName().equals("")) {
+        cond = true;
+      } else {
+        cond = false;
+      }
+    }
+    return cond;
+  }
+}
