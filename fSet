@@ -1,0 +1,437 @@
+package set;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.accessibility.AccessibleContext;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
+
+public class fSet
+  extends JFrame
+{
+  private Set partida;
+  private boolean jogo;
+  private JButton buttonAddColuna;
+  private JButton buttonAjuda;
+  private JButton buttonDesiste;
+  private JButton jButton1;
+  private JButton jButton10;
+  private JButton jButton11;
+  private JButton jButton12;
+  private JButton jButton13;
+  private JButton jButton14;
+  private JButton jButton15;
+  private JButton jButton16;
+  private JButton jButton17;
+  private JButton jButton18;
+  private JButton jButton19;
+  private JButton jButton2;
+  private JButton jButton20;
+  private JButton jButton21;
+  private JButton jButton3;
+  private JButton jButton4;
+  private JButton jButton5;
+  private JButton jButton6;
+  private JButton jButton7;
+  private JButton jButton8;
+  private JButton jButton9;
+  private JPanel jPanel1;
+  private JTextField textBoxPontuacao;
+  
+  public fSet()
+  {
+    initComponents();
+    this.jogo = true;
+  }
+  
+  private void initComponents()
+  {
+    this.jPanel1 = new JPanel();
+    this.jButton1 = new JButton();
+    this.jButton2 = new JButton();
+    this.jButton3 = new JButton();
+    this.jButton4 = new JButton();
+    this.jButton5 = new JButton();
+    this.jButton6 = new JButton();
+    this.jButton7 = new JButton();
+    this.jButton8 = new JButton();
+    this.jButton9 = new JButton();
+    this.jButton10 = new JButton();
+    this.jButton11 = new JButton();
+    this.jButton12 = new JButton();
+    this.jButton13 = new JButton();
+    this.jButton14 = new JButton();
+    this.jButton15 = new JButton();
+    this.jButton16 = new JButton();
+    this.jButton17 = new JButton();
+    this.jButton18 = new JButton();
+    this.jButton19 = new JButton();
+    this.jButton20 = new JButton();
+    this.jButton21 = new JButton();
+    this.textBoxPontuacao = new JTextField();
+    this.buttonDesiste = new JButton();
+    this.buttonAjuda = new JButton();
+    this.buttonAddColuna = new JButton();
+    
+    setDefaultCloseOperation(3);
+    setTitle("SET");
+    setLocation(new Point(100, 100));
+    setResizable(false);
+    addWindowListener(new WindowAdapter()
+    {
+      public void windowOpened(WindowEvent evt)
+      {
+        fSet.this.formWindowOpened(evt);
+      }
+    });
+    this.jButton1.setMaximumSize(new Dimension(95, 55));
+    this.jButton1.setMinimumSize(new Dimension(95, 55));
+    this.jButton1.setName("");
+    this.jButton1.setPreferredSize(new Dimension(95, 55));
+    this.jButton1.setRequestFocusEnabled(false);
+    this.jButton1.setRolloverEnabled(false);
+    
+    this.jButton2.setMaximumSize(new Dimension(95, 55));
+    this.jButton2.setMinimumSize(new Dimension(95, 55));
+    this.jButton2.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton3.setMaximumSize(new Dimension(95, 55));
+    this.jButton3.setMinimumSize(new Dimension(95, 55));
+    this.jButton3.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton4.setMaximumSize(new Dimension(95, 55));
+    this.jButton4.setMinimumSize(new Dimension(95, 55));
+    this.jButton4.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton5.setMaximumSize(new Dimension(95, 55));
+    this.jButton5.setMinimumSize(new Dimension(95, 55));
+    this.jButton5.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton6.setMaximumSize(new Dimension(95, 55));
+    this.jButton6.setMinimumSize(new Dimension(95, 55));
+    this.jButton6.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton7.setMaximumSize(new Dimension(95, 55));
+    this.jButton7.setMinimumSize(new Dimension(95, 55));
+    this.jButton7.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton8.setMaximumSize(new Dimension(95, 55));
+    this.jButton8.setMinimumSize(new Dimension(95, 55));
+    this.jButton8.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton9.setMaximumSize(new Dimension(95, 55));
+    this.jButton9.setMinimumSize(new Dimension(95, 55));
+    this.jButton9.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton10.setMaximumSize(new Dimension(95, 55));
+    this.jButton10.setMinimumSize(new Dimension(95, 55));
+    this.jButton10.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton11.setMaximumSize(new Dimension(95, 55));
+    this.jButton11.setMinimumSize(new Dimension(95, 55));
+    this.jButton11.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton12.setMaximumSize(new Dimension(95, 55));
+    this.jButton12.setMinimumSize(new Dimension(95, 55));
+    this.jButton12.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton13.setMaximumSize(new Dimension(95, 55));
+    this.jButton13.setMinimumSize(new Dimension(95, 55));
+    this.jButton13.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton14.setMaximumSize(new Dimension(95, 55));
+    this.jButton14.setMinimumSize(new Dimension(95, 55));
+    this.jButton14.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton15.setMaximumSize(new Dimension(95, 55));
+    this.jButton15.setMinimumSize(new Dimension(95, 55));
+    this.jButton15.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton16.setMaximumSize(new Dimension(95, 55));
+    this.jButton16.setMinimumSize(new Dimension(95, 55));
+    this.jButton16.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton17.setMaximumSize(new Dimension(95, 55));
+    this.jButton17.setMinimumSize(new Dimension(95, 55));
+    this.jButton17.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton18.setMaximumSize(new Dimension(95, 55));
+    this.jButton18.setMinimumSize(new Dimension(95, 55));
+    this.jButton18.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton19.setMaximumSize(new Dimension(95, 55));
+    this.jButton19.setMinimumSize(new Dimension(95, 55));
+    this.jButton19.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton20.setMaximumSize(new Dimension(95, 55));
+    this.jButton20.setMinimumSize(new Dimension(95, 55));
+    this.jButton20.setPreferredSize(new Dimension(95, 55));
+    
+    this.jButton21.setMaximumSize(new Dimension(95, 55));
+    this.jButton21.setMinimumSize(new Dimension(95, 55));
+    this.jButton21.setPreferredSize(new Dimension(95, 55));
+    
+    GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
+    this.jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(jPanel1Layout
+      .createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
+      .addContainerGap()
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+      .addComponent(this.jButton15, -1, -1, -2)
+      .addComponent(this.jButton8, -1, -1, -2)
+      .addComponent(this.jButton1, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton2, -1, -1, -2)
+      .addComponent(this.jButton9, -1, -1, -2)
+      .addComponent(this.jButton16, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton3, -1, -1, -2)
+      .addComponent(this.jButton10, -1, -1, -2)
+      .addComponent(this.jButton17, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton4, -1, -1, -2)
+      .addComponent(this.jButton11, -1, -1, -2)
+      .addComponent(this.jButton18, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton5, -1, -1, -2)
+      .addComponent(this.jButton12, -1, -1, -2)
+      .addComponent(this.jButton19, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton6, -1, -1, -2)
+      .addComponent(this.jButton13, -1, -1, -2)
+      .addComponent(this.jButton20, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton7, -1, -1, -2)
+      .addComponent(this.jButton14, -1, -1, -2)
+      .addComponent(this.jButton21, -1, -1, -2))
+      .addContainerGap(-1, 32767)));
+    
+    jPanel1Layout.setVerticalGroup(jPanel1Layout
+      .createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
+      .addContainerGap()
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton7, -1, -1, -2)
+      .addComponent(this.jButton6, -1, -1, -2)
+      .addComponent(this.jButton5, -1, -1, -2)
+      .addComponent(this.jButton4, -1, -1, -2)
+      .addComponent(this.jButton3, -1, -1, -2)
+      .addComponent(this.jButton2, -1, -1, -2)
+      .addComponent(this.jButton1, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton8, -1, -1, -2)
+      .addComponent(this.jButton9, -1, -1, -2)
+      .addComponent(this.jButton10, -1, -1, -2)
+      .addComponent(this.jButton11, -1, -1, -2)
+      .addComponent(this.jButton12, -1, -1, -2)
+      .addComponent(this.jButton13, -1, -1, -2)
+      .addComponent(this.jButton14, -1, -1, -2))
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+      .addComponent(this.jButton15, -1, -1, -2)
+      .addComponent(this.jButton16, -1, -1, -2)
+      .addComponent(this.jButton17, -1, -1, -2)
+      .addComponent(this.jButton18, -1, -1, -2)
+      .addComponent(this.jButton19, -1, -1, -2)
+      .addComponent(this.jButton20, -1, -1, -2)
+      .addComponent(this.jButton21, -1, -1, -2))
+      .addContainerGap(-1, 32767)));
+    
+    this.textBoxPontuacao.setEditable(false);
+    
+    this.buttonDesiste.setPreferredSize(new Dimension(42, 34));
+    this.buttonDesiste.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent evt)
+      {
+        fSet.this.buttonDesisteActionPerformed(evt);
+      }
+    });
+    this.buttonAjuda.setPreferredSize(new Dimension(42, 34));
+    this.buttonAjuda.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent evt)
+      {
+        fSet.this.buttonAjudaActionPerformed(evt);
+      }
+    });
+    this.buttonAddColuna.setPreferredSize(new Dimension(42, 34));
+    this.buttonAddColuna.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent evt)
+      {
+        fSet.this.buttonAddColunaActionPerformed(evt);
+      }
+    });
+    GroupLayout layout = new GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(layout
+      .createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+      .addContainerGap()
+      .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+      .addComponent(this.jPanel1, -2, -1, -2)
+      .addContainerGap(-1, 32767))
+      .addGroup(layout.createSequentialGroup()
+      .addComponent(this.textBoxPontuacao, -2, 245, -2)
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+      .addComponent(this.buttonDesiste, -2, -1, -2)
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addComponent(this.buttonAjuda, -2, 42, -2)
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addComponent(this.buttonAddColuna, -2, 45, -2)
+      .addGap(30, 30, 30)))));
+    
+    layout.setVerticalGroup(layout
+      .createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+      .addContainerGap()
+      .addComponent(this.jPanel1, -2, -1, -2)
+      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+      .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+      .addComponent(this.textBoxPontuacao, GroupLayout.Alignment.TRAILING)
+      .addComponent(this.buttonAddColuna, -1, -1, -2)
+      .addComponent(this.buttonDesiste, -1, -1, -2)
+      .addComponent(this.buttonAjuda, -1, -1, -2))
+      .addContainerGap()));
+    
+    this.buttonDesiste.getAccessibleContext().setAccessibleName("buttonDesiste");
+    this.buttonAjuda.getAccessibleContext().setAccessibleName("buttonAjuda");
+    
+    pack();
+  }
+  
+  private void formWindowOpened(WindowEvent evt)
+  {
+    JButton[][] mesa = { { this.jButton1, this.jButton2, this.jButton3, this.jButton4, this.jButton5, this.jButton6, this.jButton7 }, { this.jButton8, this.jButton9, this.jButton10, this.jButton11, this.jButton12, this.jButton13, this.jButton14 }, { this.jButton15, this.jButton16, this.jButton17, this.jButton18, this.jButton19, this.jButton20, this.jButton21 } };
+    
+    this.buttonDesiste.setBorderPainted(false);
+    this.buttonDesiste.setFocusPainted(false);
+    this.buttonDesiste.setContentAreaFilled(false);
+    
+    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/del.png"));
+    Image img = icon.getImage();
+    img = img.getScaledInstance(32, 32, 4);
+    this.buttonDesiste.setIcon(new ImageIcon(img));
+    
+    this.buttonAjuda.setBorderPainted(false);
+    this.buttonAjuda.setFocusPainted(false);
+    this.buttonAjuda.setContentAreaFilled(false);
+    
+    icon = new ImageIcon(getClass().getClassLoader().getResource("images/help.png"));
+    img = icon.getImage();
+    img = img.getScaledInstance(32, 32, 4);
+    this.buttonAjuda.setIcon(new ImageIcon(img));
+    
+    this.buttonAddColuna.setBorderPainted(false);
+    this.buttonAddColuna.setFocusPainted(true);
+    this.buttonAddColuna.setContentAreaFilled(false);
+    
+    icon = new ImageIcon(getClass().getClassLoader().getResource("images/add.png"));
+    img = icon.getImage();
+    img = img.getScaledInstance(32, 32, 4);
+    this.buttonAddColuna.setIcon(new ImageIcon(img));
+    
+    this.partida = new Set(mesa, this.textBoxPontuacao, this);
+    this.partida.Iniciar();
+  }
+  
+  private void buttonAjudaActionPerformed(ActionEvent evt)
+  {
+    this.partida.MostrarSetNaMesa();
+  }
+  
+  private void buttonDesisteActionPerformed(ActionEvent evt)
+  {
+    if (this.jogo)
+    {
+      this.jogo = (!this.partida.Terminar("Continue tentando! Sua pontua����o foi de: " + this.textBoxPontuacao.getText(), false));
+      ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/start.png"));
+      Image img = icon.getImage();
+      img = img.getScaledInstance(32, 32, 4);
+      this.buttonDesiste.setIcon(new ImageIcon(img));
+      this.buttonAddColuna.setEnabled(false);
+    }
+    else
+    {
+      ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/del.png"));
+      Image img = icon.getImage();
+      img = img.getScaledInstance(32, 32, 4);
+      this.buttonDesiste.setIcon(new ImageIcon(img));
+      this.jogo = true;
+      this.partida.Iniciar();
+      this.buttonAddColuna.setEnabled(true);
+    }
+  }
+  
+  private void buttonAddColunaActionPerformed(ActionEvent evt)
+  {
+    this.partida.AdicionarColunaSlots();
+  }
+  
+  public static void main(String[] args)
+  {
+    try
+    {
+      for (UIManager.LookAndFeelInfo info : ) {
+        if ("Nimbus".equals(info.getName()))
+        {
+          UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    }
+    catch (ClassNotFoundException ex)
+    {
+      Logger.getLogger(fSet.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (InstantiationException ex)
+    {
+      Logger.getLogger(fSet.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (IllegalAccessException ex)
+    {
+      Logger.getLogger(fSet.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (UnsupportedLookAndFeelException ex)
+    {
+      Logger.getLogger(fSet.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    EventQueue.invokeLater(new Runnable()
+    {
+      public void run()
+      {
+        new fSet().setVisible(true);
+      }
+    });
+  }
+}
